@@ -59,24 +59,24 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
               <p className="font-display text-xl font-semibold text-ink">
                 {order.orderId}
               </p>
-              <p className="mt-0.5 text-sm text-ink/60">
+              <p className="mt-0.5 whitespace-nowrap text-sm text-ink/60">
                 {formatOrderDate(order.orderDate)}
               </p>
             </div>
             <PaymentStatusBadge status={order.paymentStatus} />
           </div>
-          <div className="mt-4 space-y-1 border-t border-line pt-4 text-sm">
-            <div className="flex justify-between">
-              <span className="text-ink/50">Nama</span>
-              <span className="font-medium text-ink">{order.customerName}</span>
+          <div className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm">
+            <div className="flex items-start justify-between gap-4">
+              <span className="shrink-0 whitespace-nowrap text-ink/50">Nama</span>
+              <span className="min-w-0 text-right font-medium text-ink">{order.customerName}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-ink/50">Pengiriman</span>
-              <span className="font-medium text-ink">{order.shippingMethod}</span>
+            <div className="flex items-start justify-between gap-4">
+              <span className="shrink-0 whitespace-nowrap text-ink/50">Pengiriman</span>
+              <span className="min-w-0 text-right font-medium text-ink">{order.shippingMethod}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-ink/50">Status Pesanan</span>
-              <span className="font-medium text-ink">{order.orderStatus}</span>
+            <div className="flex items-start justify-between gap-4">
+              <span className="shrink-0 whitespace-nowrap text-ink/50">Status Pesanan</span>
+              <span className="min-w-0 text-right font-medium text-ink">{order.orderStatus}</span>
             </div>
           </div>
         </div>

@@ -31,27 +31,27 @@ export function PaymentSummaryCard({
       <div className="space-y-2.5 text-[15px]">
         {hasDiscount && (
           <>
-            <div className="flex justify-between">
-              <span className="text-ink/60">Subtotal Produk</span>
-              <span className="font-medium text-ink">
+            <div className="flex items-start justify-between gap-4">
+              <span className="shrink-0 whitespace-nowrap text-ink/60">Subtotal Produk</span>
+              <span className="whitespace-nowrap text-right font-medium text-ink">
                 {formatRupiah(subtotalBeforeDiscount)}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-ink/60">Diskon</span>
-              <span className="font-medium text-marigold">
+            <div className="flex items-start justify-between gap-4">
+              <span className="shrink-0 whitespace-nowrap text-ink/60">Diskon</span>
+              <span className="whitespace-nowrap text-right font-medium text-marigold">
                 -{formatRupiah(discountTotal)}
               </span>
             </div>
           </>
         )}
-        <div className="flex justify-between">
-          <span className="text-ink/60">Total Pesanan</span>
-          <span className="font-medium text-ink">{formatRupiah(total)}</span>
+        <div className="flex items-start justify-between gap-4">
+          <span className="shrink-0 whitespace-nowrap text-ink/60">Total Pesanan</span>
+          <span className="whitespace-nowrap text-right font-medium text-ink">{formatRupiah(total)}</span>
         </div>
-        <div className="flex justify-between">
-          <span className="text-ink/60">Sudah Dibayar</span>
-          <span className="font-medium text-ink">{formatRupiah(paid)}</span>
+        <div className="flex items-start justify-between gap-4">
+          <span className="shrink-0 whitespace-nowrap text-ink/60">Sudah Dibayar</span>
+          <span className="whitespace-nowrap text-right font-medium text-ink">{formatRupiah(paid)}</span>
         </div>
       </div>
 
@@ -60,17 +60,17 @@ export function PaymentSummaryCard({
         aria-hidden="true"
       />
 
-      <div className="flex items-end justify-between">
-        <span className="text-[15px] text-ink/60">
+      <div className="flex items-end justify-between gap-4">
+        <span className="shrink-0 whitespace-nowrap text-[15px] text-ink/60">
           {status === "LUNAS" ? "Status" : "Kekurangan"}
         </span>
         {status === "LUNAS" ? (
-          <span className="font-display text-2xl font-semibold text-leaf">
+          <span className="whitespace-nowrap font-display text-2xl font-semibold text-leaf">
             Lunas ✓
           </span>
         ) : (
           <span
-            className={`font-display text-3xl font-semibold ${REMAINING_COLOR[status]}`}
+            className={`whitespace-nowrap font-display text-3xl font-semibold ${REMAINING_COLOR[status]}`}
           >
             {formatRupiah(remaining)}
           </span>
