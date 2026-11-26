@@ -19,7 +19,8 @@ export function HomePage({ onSubmit, initialValue = "" }: HomePageProps) {
 
   return (
     <div className="flex flex-1 flex-col">
-
+      <div className="flex flex-1 flex-col items-center justify-center text-center">
+        <BookMark className="h-14 w-14" />
         <h1 className="mt-5 font-display text-[28px] font-semibold leading-tight text-ink">
           📦 Cek Pesanan Kamu
         </h1>
