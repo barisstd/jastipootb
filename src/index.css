@@ -28,19 +28,3 @@
     scrollbar-width: none;
   }
 }
-
-/* Print output: same simple look as the on-screen order detail, with
-   a store header and thank-you footer added (see ReceiptPrintHeader /
-   ReceiptPrintFooter). Colors are kept so badges and prices print as
-   they appear on screen. */
-@media print {
-  @page {
-    margin: 10mm;
-  }
-  html,
-  body {
-    background: #fff;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-}

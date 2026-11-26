@@ -23,7 +23,7 @@ export default function App() {
   }, [screen, selectOrder]);
 
   return (
-    <AppShell>
+    <AppShell largeHeader={screen.name === "home"}>
       {renderScreen()}
     </AppShell>
   );

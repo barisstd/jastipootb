@@ -6,7 +6,7 @@ interface ScreenHeaderProps {
 
 export function ScreenHeader({ title, onBack, backLabel = "Kembali" }: ScreenHeaderProps) {
   return (
-    <div className="mb-6 flex items-center gap-3 print:hidden">
+    <div className="mb-6 flex items-center gap-3">
       <button
         onClick={onBack}
         aria-label={backLabel}

@@ -22,21 +22,21 @@ export function PaymentAccountsPanel() {
 
   return (
     <div className="rounded-card border border-line bg-white p-5 shadow-soft">
-      <p className="text-[15px] font-medium text-ink print:text-sm">
+      <p className="text-[15px] font-medium text-ink">
         Silakan transfer ke rekening berikut:
       </p>
 
-      <div className="mt-2 divide-y divide-line print:mt-1.5 print:grid print:grid-cols-2 print:gap-x-3 print:gap-y-1.5 print:divide-y-0">
+      <div className="mt-2 divide-y divide-line">
         {PAYMENT_ACCOUNTS.map((account) => {
           const isCopied = copiedBank === account.bank;
           return (
             <div
               key={account.bank}
-              className="flex items-center justify-between gap-3 py-3 print:flex-col print:items-start print:gap-0 print:py-0"
+              className="flex items-center justify-between gap-3 py-3"
             >
               <div className="min-w-0">
-                <p className="text-sm text-ink/60 print:text-xs">{account.bank}</p>
-                <p className="truncate font-display text-lg font-semibold tracking-wide text-ink print:text-sm">
+                <p className="text-sm text-ink/60">{account.bank}</p>
+                <p className="truncate font-display text-lg font-semibold tracking-wide text-ink">
                   {account.accountNumber}
                 </p>
               </div>
@@ -46,7 +46,7 @@ export function PaymentAccountsPanel() {
                 aria-label={`Salin nomor rekening ${account.bank}`}
                 className={[
                   "flex shrink-0 items-center gap-1.5 rounded-xl border px-3 py-2",
-                  "text-sm font-medium transition-colors duration-150 print:hidden",
+                  "text-sm font-medium transition-colors duration-150",
                   isCopied
                     ? "border-leaf bg-leaf-light text-leaf"
                     : "border-cloth/30 text-cloth hover:bg-cloth/5 active:bg-cloth/10",
@@ -67,7 +67,7 @@ export function PaymentAccountsPanel() {
         })}
       </div>
 
-      <p className="mt-4 text-sm text-ink/50 print:mt-3 print:text-xs">
+      <p className="mt-4 text-sm text-ink/50">
         a.n. {PAYMENT_ACCOUNT_HOLDER}
       </p>
     </div>

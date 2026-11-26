@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ScreenHeader } from "@/components/ScreenHeader";
-import { ReceiptPrintHeader } from "@/components/ReceiptPrintHeader";
-import { ReceiptPrintFooter } from "@/components/ReceiptPrintFooter";
+import { InvoiceImage } from "@/components/InvoiceImage";
 import { PaymentStatusBadge } from "@/components/PaymentStatusBadge";
 import { ProductRow } from "@/components/ProductRow";
 import { PaymentSummaryCard } from "@/components/PaymentSummaryCard";
 import { PaymentAccountsPanel } from "@/components/PaymentAccountsPanel";
 import { Button } from "@/components/Button";
 import { formatOrderDate } from "@/lib/format";
+import { downloadElementAsPng } from "@/lib/downloadInvoice";
 import type { OrderDetail } from "@/types/order";
 
 interface OrderDetailPageProps {
@@ -20,12 +20,28 @@ const ADMIN_WHATSAPP = import.meta.env.VITE_ADMIN_WHATSAPP || "6281234567890";
 
 export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProps) {
   const [showPayment, setShowPayment] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState(false);
+  const invoiceRef = useRef<HTMLDivElement>(null);
   const isUnpaid = order.paymentStatus !== "LUNAS";
 
   const waMessage = encodeURIComponent(
     `Halo Admin Ijun Bookstore, saya mau tanya soal pesanan ${order.orderId} (${order.customerName}).`
   );
   const waHref = `https://wa.me/${ADMIN_WHATSAPP}?text=${waMessage}`;
+
+  async function handleDownload() {
+    if (!invoiceRef.current || downloading) return;
+    setDownloading(true);
+    setDownloadError(false);
+    try {
+      await downloadElementAsPng(invoiceRef.current, `invoice-${order.orderId}.png`);
+    } catch {
+      setDownloadError(true);
+    } finally {
+      setDownloading(false);
+    }
+  }
 
   return (
     <div className="flex flex-1 flex-col">
@@ -36,8 +52,6 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
       )}
 
       <div className="flex flex-col gap-5">
-        <ReceiptPrintHeader />
-
         {/* Order identity */}
         <div className="rounded-card border border-line bg-white p-5 shadow-soft">
           <div className="flex items-start justify-between gap-3">
@@ -94,20 +108,15 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
               variant="primary"
               fullWidth
               onClick={() => setShowPayment((s) => !s)}
-              className="print:hidden"
             >
               {showPayment ? "Sembunyikan Info Transfer" : "Bayar Sekarang"}
             </Button>
-            {/* Always in the DOM so it shows on a printed receipt even if
-                the customer never toggled it open on screen. */}
-            <div className={showPayment ? "block" : "hidden print:block"}>
-              <PaymentAccountsPanel />
-            </div>
+            {showPayment && <PaymentAccountsPanel />}
           </div>
         )}
 
         {/* CTAs */}
-        <div className="flex flex-col gap-3 pb-2 print:hidden">
+        <div className="flex flex-col gap-3 pb-2">
           <Button
             variant="secondary"
             fullWidth
@@ -115,12 +124,20 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
           >
             Hubungi Admin
           </Button>
-          <Button variant="outline" fullWidth onClick={() => window.print()}>
-            Cetak Invoice
+          <Button variant="outline" fullWidth loading={downloading} onClick={handleDownload}>
+            Download Invoice
           </Button>
+          {downloadError && (
+            <p className="text-center text-sm text-brick">
+              Gagal membuat gambar invoice. Coba lagi ya.
+            </p>
+          )}
         </div>
+      </div>
 
-        <ReceiptPrintFooter />
+      {/* Off-screen copy of the invoice that gets captured as the image. */}
+      <div aria-hidden="true" className="pointer-events-none fixed left-[-9999px] top-0">
+        <InvoiceImage ref={invoiceRef} order={order} />
       </div>
     </div>
   );
