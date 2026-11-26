@@ -29,22 +29,18 @@
   }
 }
 
-/* Receipt-style print output. Narrow thermal-receipt width (58mm) so
-   the download/print renders like a struk belanja instead of a full
-   A4 page — on a normal printer the browser just centers this narrow
-   column with blank margins either side. */
+/* Print output: same simple look as the on-screen order detail, with
+   a store header and thank-you footer added (see ReceiptPrintHeader /
+   ReceiptPrintFooter). Colors are kept so badges and prices print as
+   they appear on screen. */
 @media print {
   @page {
-    size: 58mm auto;
-    margin: 4mm 3mm;
+    margin: 10mm;
   }
+  html,
   body {
     background: #fff;
-  }
-  .shadow-soft {
-    box-shadow: none;
-  }
-  .rounded-card {
-    border-radius: 2px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

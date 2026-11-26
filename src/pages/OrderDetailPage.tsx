@@ -35,23 +35,23 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
         <ScreenHeader title="Detail Pesanan" onBack={onBack} backLabel="Cari nomor lain" />
       )}
 
-      <div className="flex flex-col gap-5 print:gap-2">
+      <div className="flex flex-col gap-5">
         <ReceiptPrintHeader />
 
         {/* Order identity */}
-        <div className="rounded-card border border-line bg-white p-5 shadow-soft print:rounded-none print:border-dashed print:p-2 print:shadow-none">
+        <div className="rounded-card border border-line bg-white p-5 shadow-soft">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="font-display text-xl font-semibold text-ink print:text-sm">
+              <p className="font-display text-xl font-semibold text-ink">
                 {order.orderId}
               </p>
-              <p className="mt-0.5 text-sm text-ink/60 print:text-[10px]">
+              <p className="mt-0.5 text-sm text-ink/60">
                 {formatOrderDate(order.orderDate)}
               </p>
             </div>
             <PaymentStatusBadge status={order.paymentStatus} />
           </div>
-          <div className="mt-4 space-y-1 border-t border-line pt-4 text-sm print:mt-2 print:pt-2 print:text-[10px]">
+          <div className="mt-4 space-y-1 border-t border-line pt-4 text-sm">
             <div className="flex justify-between">
               <span className="text-ink/50">Nama</span>
               <span className="font-medium text-ink">{order.customerName}</span>
@@ -68,9 +68,9 @@ export function OrderDetailPage({ order, onBack, showBack }: OrderDetailPageProp
         </div>
 
         {/* Product list */}
-        <div className="rounded-card border border-line bg-white p-5 shadow-soft print:rounded-none print:border-dashed print:p-2 print:shadow-none">
-          <p className="mb-1 text-sm font-medium text-ink/70 print:text-[10px]">Produk</p>
-          <div className="divide-y divide-line print:divide-ink/10">
+        <div className="rounded-card border border-line bg-white p-5 shadow-soft">
+          <p className="mb-1 text-sm font-medium text-ink/70">Produk</p>
+          <div className="divide-y divide-line">
             {order.items.map((item, i) => (
               <ProductRow key={`${item.productName}-${i}`} item={item} />
             ))}

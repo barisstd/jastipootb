@@ -21,8 +21,8 @@ export function PaymentAccountsPanel() {
   }
 
   return (
-    <div className="rounded-card border border-line bg-white p-5 shadow-soft print:rounded-none print:border-dashed print:p-2 print:shadow-none">
-      <p className="text-[15px] font-medium text-ink print:text-[10px]">
+    <div className="rounded-card border border-line bg-white p-5 shadow-soft">
+      <p className="text-[15px] font-medium text-ink print:text-sm">
         Silakan transfer ke rekening berikut:
       </p>
 
@@ -35,8 +35,8 @@ export function PaymentAccountsPanel() {
               className="flex items-center justify-between gap-3 py-3 print:flex-col print:items-start print:gap-0 print:py-0"
             >
               <div className="min-w-0">
-                <p className="text-sm text-ink/60 print:text-[8px]">{account.bank}</p>
-                <p className="truncate font-display text-lg font-semibold tracking-wide text-ink print:text-[10px]">
+                <p className="text-sm text-ink/60 print:text-xs">{account.bank}</p>
+                <p className="truncate font-display text-lg font-semibold tracking-wide text-ink print:text-sm">
                   {account.accountNumber}
                 </p>
               </div>
@@ -67,7 +67,7 @@ export function PaymentAccountsPanel() {
         })}
       </div>
 
-      <p className="mt-4 text-sm text-ink/50 print:mt-2 print:text-[9px]">
+      <p className="mt-4 text-sm text-ink/50 print:mt-3 print:text-xs">
         a.n. {PAYMENT_ACCOUNT_HOLDER}
       </p>
     </div>
